@@ -1,0 +1,81 @@
+h2 {
+    text-align: center;
+    color: rgb(16, 74, 235);
+}
+
+label{
+    color: rgb(10, 6, 251);
+}
+
+div.center{
+    text-align: center;
+}
+
+#bordercontainer{
+    background-color: black;
+
+}
+
+#ContenedorTop,#ColumnaIzquierda{
+    background-color: rgb(182, 229, 160);
+}
+
+
+
+/* #FanClub{
+    margin: 0 auto;
+    background-color: gold;
+    border: 2px solid rgb(28, 8, 216);
+    border-spacing: 0;
+    padding: 0.3em;
+    text-align: center;
+    
+}*/
+
+
+/* Estilo de las tablas: https://mosaic.uoc.edu/ac/le/es/m6/ud7/index.html */
+#FanClub {
+    border-collapse: separate;
+    border-spacing: 5px;
+    background: rgb(7, 20, 144);
+    margin: 0  auto;
+    visibility: hidden;
+    
+ }
+ th, td {
+    width: 25%;
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: top;
+    background: #fff;
+    color: #000;
+    padding: 0.3em;
+
+ }
+
+body {
+    background-color:rgb(255, 255, 255);
+}
+
+/* Configuracion para usar el border container */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+#borderContainer {
+    height: 100%;
+    width: 100%;
+}
+
+#grid {
+
+    width:50em;
+    height: 20em;
+    margin: auto;
+    text-align: center;
+}
+

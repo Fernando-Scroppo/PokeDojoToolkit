@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeApi</title>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/claro/claro.css"
+        media="screen">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojox/grid/enhanced/resources/claro/EnhancedGrid.css"
+        media="screen">
+    <link rel="stylesheet"
+        href="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojox/grid/enhanced/resources/EnhancedGrid_rtl.css"
+        media="screen">
+
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"
+        data-dojo-config="async: true,parseOnLoad:1"></script>
+
+    <script src="dojo.js"></script>
+
+    <script type="text/javascript">
+
+        /* Configure application.
+        appConfig = {
+            // Get base url from current url.
+            baseUrl: location.href.substring(0,location.href.lastIndexOf("/")+1)
+        };*/
+
+        /*dojoConfig = {
+            parseOnLoad: true
+        };*/
+
+
+        // Usar grid para la tabla del pikachu, carga una tabla hecha con HTML con dojo. 
+
+        // Cargar aplicacion
+        require(
+            {
+                packages: [
+                    { name: 'app', location: location.pathname.replace(/\/[^/]*$/, '') + '/app' }
+                ]
+            },
+            [
+                "app/home"
+            ]
+        );
+    </script>
+
+
+
+</head>
+
+<body class="claro">
+
+    <!-- Ver los bordes de los contenedores -->
+
+    <div id="bordercontainer" style="width: 100%; height: 100%" data-dojo-type="dijit/layout/BorderContainer"
+        data-dojo-props="design:'headline', gutters:true, liveSplitters:true ">
+
+        <!-- Contenedor TOP -->
+
+        <div id="ContenedorTop" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'top'">
+
+            <div class="center">
+                <img src="img\logo_pokemon.png" width="20%">
+            </div>
+        </div>
+
+        <!-- Contenedor left-->
+
+        <div id="ColumnaIzquierda" class="edgePanel" data-dojo-type="dijit/layout/ContentPane"
+            data-dojo-props="region: 'left', splitter: true">
+
+            <!-- Title panel -->
+            <div class="TitlePanel1" data-dojo-type="dijit/TitlePane" data-dojo-props="open:false"
+                title="Los pokemones mas pedidos">
+                Titulo de Panel 1
+            </div>
+            <div class="TitlePanel2" data-dojo-type="dijit/TitlePane" data-dojo-props="open:false"
+                title="Personajes Principales">
+                Titulo de Panel 2
+            </div>
+
+
+
+        </div>
+
+        <!-- Panel Central -->
+
+        <div class="centerPanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center'">
+
+
+            <div data-dojo-type="dijit/layout/TabContainer" style="width: 25%" data-dojo-props="region:'center'">
+
+                <div class="TabPanel1" data-dojo-type="dijit/layout/ContentPane"
+                    data-dojo-props="title: 'Buscar Pokemon'">
+                    <br>
+                    <div class="center">
+
+                        <label for="firstname">
+                            <h2><strong> Ingresa el nombre de tu Pokemon: </strong></h2>
+                        </label>
+                        <!--input type="text" name="name" data-dojo-type="dijit/form/TextBox " id="pokemonName" value="" /-->
+
+                        <select id="pokemonName" data-dojo-type="dijit/form/FilteringSelect"
+                            data-dojo-props="value:'', placeHolder: 'Ingresa tu pokemon'">
+                            <option value="bulbasaur">bulbasaur</option>
+                            <option value="charizard">charizard</option>
+                            <option value="charmander">charmander</option>
+                            <option value="squirtle">squirtle</option>
+                            <option value="pikachu">pikachu</option>
+                            <option value="caterpie">butterfree</option>
+                            <option value="metapod">metapod</option>
+                        </select>
+
+                        <br>
+                        <br>
+                        <button id="buscarpokemon"></button>
+                    </div>
+                    <br>
+
+                    <div id="respuesta"></div>
+
+                </div>
+
+                <div class="TabPanel2" data-dojo-type="dijit/layout/ContentPane"
+                    data-dojo-props="title: 'Registrate y te llevamos tu pokemon a Casa'">
+
+                    <!-- Aca vamos a colocar el formulario de Registro -->
+
+                    <h2> ¡¡Registrate y te mandamos tu Pokemon favorito!! </h2>
+
+
+
+                    <form class="formulario" id="form" data-dojo-type="dijit/form/Form" enctype="multipart/form-data"
+                        action="" method="POST">
+                        <!-- Definir el uso del form manager -->
+
+                        <fieldset>
+
+                            <legend>
+                                <h2> Datos Personales</h2>
+                            </legend>
+
+                            <div class="center">
+
+                                <label for="nombre">Nombre:</label>
+                            </div>
+                            <div class="center">
+                                <input id="nombre" data-dojo-type="dijit/form/TextBox"
+                                    data-dojo-props="placeHolder: 'Ingrese su nombre'">
+                            </div>
+                            <br>
+
+                            <div class="center">
+                                <label for="apellido">Apellido:</label>
+                            </div>
+                            <div class="center">
+                                <input id="apellido" data-dojo-type="dijit/form/TextBox"
+                                    data-dojo-props="placeHolder: 'Ingrese su apellido'">
+                            </div>
+                            <br>
+                            <div class="center">
+                                <label for="dni"> DNI: </label>
+                            </div>
+                            <div class="center">
+                                <input type="text" name="dni" id="dni" value="" required="true"
+                                    data-dojo-type="dijit/form/ValidationTextBox"
+                                    data-dojo-props="placeHolder: 'Ingrese su DNI',
+                                                 regExp:'\\d{8}', invalidMessage: 'El DNI no puede tener mas de 8 digitos' " />
+                            </div>
+
+                            <br>
+                            <div class="center">
+                                <label> E-mail: </label>
+                                <!-- Para validar el e-mail voy a tener que utilizar dojox/Validate (Formulario y validaciones).  -->
+                            </div>
+                            <div class="center">
+                                <input id="email" type="email" name="email" value="" required="true"
+                                    data-dojo-type="dijit/form/ValidationTextBox"
+                                    data-dojo-props="validator:dojox.validate.isEmailAddress, invalidMessage:'E-mail invalido' ,placeHolder: 'Ingrese su E-mail'" />
+                            </div>
+
+                            <br>
+
+                            <div class="center">
+                                <label> Tu Pagina Web </label>
+                            </div>
+
+                            <div class="center">
+                                <input id="pagina" type="text" name="pagina" value=""
+                                    data-dojo-type="dijit/form/TextBox"
+                                    data-dojo-props="validator:dojox.validate.isUrl, invalidMessage:'La URL ingresada es invalida',placeHolder: 'Ingrese la URL de su pagina web'" />
+                            </div>
+
+                            <br>
+
+                            <div class="center">
+                                <label> Telefono de Linea: </label>
+                            </div>
+
+                            <div class="center">
+                                <input id="tFijo" type="text" name="tFijo" value="" required="true"
+                                    data-dojo-type="dijit/form/ValidationTextBox"
+                                    data-dojo-props="validator:dojox.validate.telefonoFijo, invalidMessage:'Debe tener el siguiente formato: (011) 2222-2222',placeHolder: '(011) 2222-2222'" />
+                            </div>
+
+                            <br>
+
+                            <div class="center">
+                                <label> Telefono Celular: </label>
+                            </div>
+
+                            <div class="center">
+                                <input id="tCelular" type="text" name="tCelular" value="" required="true"
+                                    data-dojo-type="dijit/form/ValidationTextBox"
+                                    data-dojo-props="validator:dojox.validate.celular, invalidMessage:'Debe tener el siguiente formato: 11-22222222',placeHolder: '11-22222222'" />
+                            </div>
+
+                            <br>
+
+                            <div class="center">
+                                <label> Fecha De nacimiento </label>
+                            </div>
+
+                            <div class="center">
+                                <input id="fNacimiento" type="text" name="fNacimiento" value="" required="true"
+                                    data-dojo-type="dijit/form/DateTextBox">
+
+                            </div>
+
+                        </fieldset>
+
+                        <fieldset>
+
+                            <legend>
+                                <h2> Domicilio </h2>
+                            </legend>
+
+                            <label> Nombre de la calle: </label>
+                            <input id="calle" type="text" value="" required="true" data-dojo-type="dijit/form/TextBox"
+                                data-dojo-props="placeHolder: 'Ingrese el nombre de su calle'">
+
+                            &nbsp;
+                            &nbsp;
+
+                            <label> Numero: </label>
+                            <input id="numero" type="number" value="" required="true" data-dojo-type="dijit/form/NumberTextBox"
+                                data-dojo-props="placeHolder: 'Ingrese el numero de su calle', invalidMessage: 'Solo numeros' ">
+                            
+                            <br>
+                            <br>
+
+                            <label> Codigo Postal: </label>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input id="CP" type="number" value="" required="true" data-dojo-type="dijit/form/NumberTextBox"
+                                data-dojo-props="placeHolder: 'Ingrese su codigo Postal', invalidMessage: 'Solo numeros' ">
+
+                                &nbsp;
+                                &nbsp;
+
+                            <label> Provincia: </label>
+                            <select id="Provincia" data-dojo-type="dijit/form/FilteringSelect"
+                            data-dojo-props="value:'',placeHolder: 'Selecciona tu Provincia'">
+                                <option value="Buenos Aires">Buenos Aires</option>
+                                <option value="Chaco">Chaco</option>
+                                <option value="Formosa">Formosa</option>
+                                <option value="Tierra Del fuego">Tierra Del Fuego</option>
+                                <option value="La Pampa"> La Pampa </option>
+                                <option value="Mendoza">Mendoza</option>
+                                <option value="La Rioja">La Rioja</option>
+                            </select>
+
+                        </fieldset>
+
+                        <fieldset>
+
+                            <legend>
+                                <h2> Zona de Comentarios </h2>
+                            </legend>
+
+
+
+
+                        </fieldset>
+
+
+
+                        <br>
+                        <div class="center">
+                            <div data-dojo-type="dijit/form/ValidationTextBox"
+                                data-dojo-props="validator:dojox.validate.isOver666, invalidMessage:'Value must be over 666'"
+                                title="Custom:" name="custom" value="123"></div>
+                        </div>
+
+                        <!-- !!Revisar repositorio de Cepa y agregar validacion de sitio web, de tarjeta de credito, y agregar 
+                        formato de numero de telefono y el dinero que va a abonar!!  -->
+
+
+                        <!--label for="zip2">Also 5-Digit U.S. Zipcode only:</label>
+                        <input type="text" name="zip" value="00000" id="zip2" required="true"
+                            data-dojo-type="dijit/form/ValidationTextBox"
+                            data-dojo-props="regExpGen:after5, invalidMessage:'Zip codes after 5, county name before then.'" /-->
+
+
+
+                        <!-- Vamos a agregar el Editor de Dijit, para que puedan agregar comentarios -->
+
+                        <br>
+                        <br>
+                        <div class="center">
+                            <button type="submit" dojoType="dijit.form.Button" observer="showValues">Registrate</button>
+                        </div>
+
+                        <script type="dojo/on" data-dojo-event="submit">
+                            if(this.validate()){
+                            return confirm("El fomulario es valido");}  
+                            else{
+                                alert("El formulario no es valido, reviselo por favor");
+                                return false;
+                            }
+                        </script>
+
+
+
+                    </form>
+
+                </div>
+
+                <div class="TabPanel3" data-dojo-type="dijit/layout/ContentPane"
+                    data-dojo-props="title: 'Fan Club de Pokemon'">
+
+
+                    <table id="FanClub">
+                        <tr>
+                            <th>Nombre Completo</th>
+                            <th> E-mail </th>
+                            <th> Pais </th>
+
+                        </tr>
+
+                        <tbody id="fans">
+                        </tbody>
+                    </table>
+                    <br>
+                    <div class="center">
+                        <button id="descargarFans"></button>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

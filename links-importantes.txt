@@ -1,0 +1,3 @@
+Example Ajax using PokeAPI = https://embed.plnkr.co/plunk/wxLK9D
+
+PokeApi = https://pokeapi.co/
