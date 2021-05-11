@@ -1,4 +1,5 @@
-define("app/validate/custom", ["dojo", "dojo/_base/lang"], function(dojo, lang){
+define("app/validate/custom", ["dojo", "dojo/_base/lang"
+], function(dojo, lang){
 	var validate = lang.getObject("dojox.validate", true);
 	
 	validate.isOver666 = function(value, flags){
@@ -18,7 +19,5 @@ define("app/validate/custom", ["dojo", "dojo/_base/lang"], function(dojo, lang){
 		return (test);
 	};
 
-	
-	
 	return validate;
 });

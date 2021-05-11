@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/claro/claro.css"
+        media="screen">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"
+        data-dojo-config="async: true,parseOnLoad:1"></script>
+
+    <script src="beneficiosForm.js"></script>
+
+    <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <!--script type="text/javascript">
+        $(document).ready(function () {
+            $("input[name=nivel]").change(function () {
+                alert($(this).val());
+            });
+
+        });
+    </script-->
+
+
+    <script>
+        require(["dojo/parser", "dijit/form/DateTextBox"]);
+        let hoy = new Date();
+    </script>
+
+</head>
+
+<body class="claro">
+
+    <div id="appLayout" class="demoLayout" data-dojo-type="dijit/layout/BorderContainer"
+        data-dojo-props="design: 'headline'">
+        <div class="centerPanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center'">
+            <div>
+
+                <div id="titulo"></div>
+                <div id="saludos"></div>
+                <div id="etiqueta"></div>
+                <p class="parrafoBienvenida"> <strong> Queremos saber que tan fan sos de nuestra serie, por eso te
+                        animamos a que contestes el siguiente cuesionario
+                    </strong>
+                <p>
+                <p class="parrafoBienvenida"> <strong> ¡¡Mucha Suerte!! </strong> </p>
+
+                <br />
+
+                <!-- url + "?search=" + usuario -->
+
+
+                <form id="formularioBeneficio">
+                    <!-- De acuerdo a las selecciones que realice el fan, aparecer o desaparecer distintas opciones -->
+                    <!-- Usar Query, para traer a todos los radios u opciones que pertenescan a distintan clasese -->
+                    <fieldset>
+                        <legend>
+                            <h2>Formulario de Bienvenida </h2>
+                        </legend>
+
+                        <div class="center">
+                            <label class="preguntas"> <strong> ¿QUE NIVEL TIENES COMO FAN? </strong> </label>
+                            <br/>
+                            <input type="radio" name="nivel" id="Principiante" value="Principiante"> Principiante
+                            <input type="radio" name="nivel" id="Veterano" value="Veterano"> Veterano
+
+                            <br> 
+                            <!-- INICIO DE CONTENIDO PARA PRINCIPIANTE -->
+                            <p> <strong class="contenidoPrincipiante"> Te recomendamos ver nuestra serie desde el primer
+                                    capitulo </strong> </p>
+                            <p> <strong class="contenidoPrincipiante"> Para que puedas convertirte en un verdadero Fan
+                                    Veterano </strong> </p>
+
+                            <br>
+                            <div class="contenidoPrincipiante">
+                                <label class="preguntas"><strong> ¿SELECCIONA LOS POKEMONES QUE MAS TE GUSTEN?
+                                    </strong>
+                                </label>
+                                <br> <br>
+
+                                <input id="mycheck1" name="mycheck" data-dojo-type="dijit/form/CheckBox"
+                                    value="Pikachu" />
+                                <label for="mycheck">Pikachu</label>
+                                <input id="Charizard" name="mycheck" data-dojo-type="dijit/form/CheckBox"
+                                    value="Charizard" />
+                                <label for="mycheck2">Charizard</label>
+                                <input id="mycheck3" name="mycheck" data-dojo-type="dijit/form/CheckBox"
+                                    value="Bulbasaur" />
+                                <label for="mycheck">Bulbasaur</label>
+                                <input id="mycheck4" name="mycheck" data-dojo-type="dijit/form/CheckBox"
+                                    value="Bulbasaur" />
+                                <label for="mycheck">Charmeleon</label>
+
+                                <br /><br />
+                                <br />
+
+                                <label class="preguntas"> <strong> ¿TE GUSTARIA RECIBIR LAS ULTIMAS NOTICIAS DE NUESTRA
+                                        SERIE EN TU EMAIL? </strong> </label>
+                                <br />
+                                <br />
+                                <input type="radio" name="noticias" id="noticiasSi" value="Si"> SI
+                                <input type="radio" name="noticias" id="noticiasNo" value="No"> NO
+                                <br />
+                                <br />
+
+                                    <!-- No se muestra el corte de noticisa-->
+
+                                    <!-- El corte de noticias -->
+                            <p id="noticiaContenidoSi" style="display: none;"> ¡¡PERFECTO!! te mantendremos al tanto
+                                de
+                                todas nuestras novedades,
+                                este es el camino correcto para convertirse en un Fan VETERANO.
+                            </p>
+
+                            <p id="noticiaContenidoNo" style="display: none;"> Si realmente quieres convertirte en
+                                un
+                                Fan VETERANO este no es el camino correcto. </p>
+
+                            </div>
+
+                            
+
+                            <!-- FIN DEL CONTENIDO PARA PRINCIPIANTE -->
+
+
+                            <!-- INICIO DEL CONTENIDO VETERANO -->
+                            <div class="contenidoVeterano">
+
+                                <form id="formVeterano" action="">
+                                    <p style="font-size: large;"> <strong class="contenidoVeterano"> ¿Desde cuando
+                                            empezaste a seguirnos y cuando
+                                            viste tu
+                                            ultimo capitulo? </strong> </p>
+
+                                    <label for="fromDate">Desde Cuando:</label>
+                                    <input data-dojo-id="desdeCuando" type="text" name="fromDate"
+                                        data-dojo-type="dijit/form/DateTextBox" required="true"
+                                        data-dojo-props="constraints:{datePattern: 'dd/MM/yyyy', max:hoy}"
+                                        onChange="hastaCuando.constraints.min = arguments[0];" />
+                                    <label for="toDate">Ultimo Capitulo:</label>
+                                    <input data-dojo-id="hastaCuando" type="text" name="toDate"
+                                        data-dojo-type="dijit/form/DateTextBox" required="true"
+                                        data-dojo-props="constraints:{datePattern: 'dd/MM/yyyy',max:hoy}"
+                                        onChange="desdeCuando.constraints.max = arguments[0];" />
+
+                                    <br> <br>
+
+                                    <label class="preguntas"><strong> ¿CUALES FUERON TUS TEMPORADAS FAVORITAS?
+                                        </strong>
+                                    </label>
+                                    <br> <br>
+                                    <div class="center"></div>
+                                    <input id="mycheck5" name="mycheck" data-dojo-type="dijit/form/CheckBox"
+                                        value="Pikachu" />
+                                    <label for="mychec6">T1 - ¡Hazte con todos! </label>
+                                    <input id="Charizard6" name="mycheck" data-dojo-type="dijit/form/CheckBox"
+                                        value="Charizar6" />
+                                    <label for="mycheck">T2 - Las Islas Naranjas </label> <br> <br>
+                                    <input id="mycheck7" name="mycheck" data-dojo-type="dijit/form/CheckBox"
+                                        value="Bulbasaur" />
+                                    <label for="mycheck"> T3 - Los viajes de Johto </label>
+                                    <input id="mycheck8" name="mycheck" data-dojo-type="dijit/form/CheckBox"
+                                        value="Bulbasaur" />
+                                    <label for="mycheck"> T4 - Los campeones de la liga </label>
+
+                                    <br> <br>
+
+                                    <!-- Obtener el valor como hice con dijit editor y verificar si es >18, pedir pagar credencial, sino agradecer y mensaje de espera -->
+                                    <label class="preguntas"><strong> ¿EN QUE AÑO NACISTE?
+                                        </strong>
+                                    </label>
+                                    <br> <br>
+                                    <label for="fromDate">Fecha de Nacimiento:</label>
+                                    <input data-dojo-id="nacimientoVeterano" type="text" name="fromDate"
+                                        data-dojo-type="dijit/form/DateTextBox" required="true"
+                                        data-dojo-props="constraints:{datePattern: 'dd/MM/yyyy', max:hoy}"
+                                        onChange="hastaCuando.constraints.min = arguments[0];" />
+
+
+
+                                </form>
+                            </div>
+
+                            <br> <br>
+                            <div class="boton">
+                                <button id="EnvioformBeneficio" data-dojo-type="dijit/form/Button" type="button">
+                                    Enviar Preguntas
+                                </button>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div id="ContenedorTop" class="edgePanel" data-dojo-type="dijit/layout/ContentPane"
+            data-dojo-props="region: 'top'">
+            <div class="center">
+                <img src="img\logo_pokemon.png" width="20%">
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

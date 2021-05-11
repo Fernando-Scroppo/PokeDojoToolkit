@@ -50,11 +50,53 @@
         );
     </script>
 
+    <!--script>
+        require(["dojo/ready","dojo/parser", "dijit/Dialog", "dojo/domReady!"], function (ready,parser, Dialog) {
+
+            /*let error = "No se pudo enviar su formulario";
+            let exito = "Tu formulario se envio exitosamente";*/
+
+            ready(function () {
+
+                exito = new Dialog({
+                title: "exito",
+                content: "Exito",
+                style: 'width: 300px'
+
+                });
+
+                /*myDialog = new Dialog({
+                title: "My Dialog",
+                content: "Test content.",
+                style: "width: 300px"
+                });*/
+
+                DialogError = new Dialog({
+                id:"dialogColorError",
+                title: "ERROR",
+                content: "Atucasa",
+                //style: "width: 20%"
+
+                });
+
+            });
+
+
+        });
+    </script-->
 
 
 </head>
 
 <body class="claro">
+
+    <!-- Icono Carga -->
+
+    <!-- Cambiar la visibilidda del div, para mostrar la redireccion -->
+	<div id="iconoCarga" class="loadingOverlay pageOverlay">
+		<div class="loadingMessage"> </div>
+	</div>
+
 
     <!-- Ver los bordes de los contenedores -->
 
@@ -67,6 +109,10 @@
 
             <div class="center">
                 <img src="img\logo_pokemon.png" width="20%">
+            </div>
+
+            <div class="alinearDerecha">
+                <button data-dojo-type="dijit/form/Button" type="button" id="InicioSesion"></button>
             </div>
         </div>
 
@@ -84,8 +130,6 @@
                 title="Personajes Principales">
                 Titulo de Panel 2
             </div>
-
-
 
         </div>
 
@@ -117,6 +161,7 @@
                             <option value="metapod">metapod</option>
                         </select>
 
+
                         <br>
                         <br>
                         <button id="buscarpokemon"></button>
@@ -131,13 +176,11 @@
                     data-dojo-props="title: 'Registrate y te llevamos tu pokemon a Casa'">
 
                     <!-- Aca vamos a colocar el formulario de Registro -->
-
+                    <!-- Cambiarlo por fan club -->
                     <h2> ¡¡Registrate y te mandamos tu Pokemon favorito!! </h2>
 
 
-
-                    <form class="formulario" id="form" data-dojo-type="dijit/form/Form" enctype="multipart/form-data"
-                        action="" method="POST">
+                    <form>
                         <!-- Definir el uso del form manager -->
 
                         <fieldset>
@@ -151,7 +194,7 @@
                                 <label for="nombre">Nombre:</label>
                             </div>
                             <div class="center">
-                                <input id="nombre" data-dojo-type="dijit/form/TextBox"
+                                <input id="nombre" name="Nombre" data-dojo-type="dijit/form/TextBox" required="true"
                                     data-dojo-props="placeHolder: 'Ingrese su nombre'">
                             </div>
                             <br>
@@ -160,7 +203,7 @@
                                 <label for="apellido">Apellido:</label>
                             </div>
                             <div class="center">
-                                <input id="apellido" data-dojo-type="dijit/form/TextBox"
+                                <input id="apellido" name="Apellido" data-dojo-type="dijit/form/TextBox" required="true"
                                     data-dojo-props="placeHolder: 'Ingrese su apellido'">
                             </div>
                             <br>
@@ -168,10 +211,9 @@
                                 <label for="dni"> DNI: </label>
                             </div>
                             <div class="center">
-                                <input type="text" name="dni" id="dni" value="" required="true"
+                                <input type="text" name="DNI" id="dni" value="" required="true"
                                     data-dojo-type="dijit/form/ValidationTextBox"
-                                    data-dojo-props="placeHolder: 'Ingrese su DNI',
-                                                 regExp:'\\d{8}', invalidMessage: 'El DNI no puede tener mas de 8 digitos' " />
+                                    data-dojo-props="placeHolder: 'Ingrese su DNI'" />
                             </div>
 
                             <br>
@@ -180,14 +222,13 @@
                                 <!-- Para validar el e-mail voy a tener que utilizar dojox/Validate (Formulario y validaciones).  -->
                             </div>
                             <div class="center">
-                                <input id="email" type="email" name="email" value="" required="true"
+                                <input id="email" type="email" name="e-mail" value="" required="true"
                                     data-dojo-type="dijit/form/ValidationTextBox"
-                                    data-dojo-props="validator:dojox.validate.isEmailAddress, invalidMessage:'E-mail invalido' ,placeHolder: 'Ingrese su E-mail'" />
+                                    data-dojo-props="placeHolder: 'Ingrese su E-mail'" />
                             </div>
 
-                            <br>
 
-                            <div class="center">
+                            <!--div class="center">
                                 <label> Tu Pagina Web </label>
                             </div>
 
@@ -195,7 +236,7 @@
                                 <input id="pagina" type="text" name="pagina" value=""
                                     data-dojo-type="dijit/form/TextBox"
                                     data-dojo-props="validator:dojox.validate.isUrl, invalidMessage:'La URL ingresada es invalida',placeHolder: 'Ingrese la URL de su pagina web'" />
-                            </div>
+                            </div-->
 
                             <br>
 
@@ -204,9 +245,9 @@
                             </div>
 
                             <div class="center">
-                                <input id="tFijo" type="text" name="tFijo" value="" required="true"
+                                <input id="tFijo" type="text" name="Telefono Fijo" value="" required="true"
                                     data-dojo-type="dijit/form/ValidationTextBox"
-                                    data-dojo-props="validator:dojox.validate.telefonoFijo, invalidMessage:'Debe tener el siguiente formato: (011) 2222-2222',placeHolder: '(011) 2222-2222'" />
+                                    data-dojo-props="placeHolder: '(011) 2222-2222'" />
                             </div>
 
                             <br>
@@ -216,9 +257,9 @@
                             </div>
 
                             <div class="center">
-                                <input id="tCelular" type="text" name="tCelular" value="" required="true"
+                                <input id="tCelular" type="text" name="Telefono Celular" value="" required="true"
                                     data-dojo-type="dijit/form/ValidationTextBox"
-                                    data-dojo-props="validator:dojox.validate.celular, invalidMessage:'Debe tener el siguiente formato: 11-22222222',placeHolder: '11-22222222'" />
+                                    data-dojo-props="placeHolder: '11-22222222'" />
                             </div>
 
                             <br>
@@ -228,10 +269,10 @@
                             </div>
 
                             <div class="center">
-                                <input id="fNacimiento" type="text" name="fNacimiento" value="" required="true"
+                                <input id="fNacimiento" type="text" name="Fecha de nacimiento" value="" required="true"
                                     data-dojo-type="dijit/form/DateTextBox">
-
                             </div>
+
 
                         </fieldset>
 
@@ -242,29 +283,33 @@
                             </legend>
 
                             <label> Nombre de la calle: </label>
-                            <input id="calle" type="text" value="" required="true" data-dojo-type="dijit/form/TextBox"
+                            <input id="calle" type="text" name="Nombre de Calle" value="" required="true"
+                                data-dojo-type="dijit/form/TextBox"
                                 data-dojo-props="placeHolder: 'Ingrese el nombre de su calle'">
 
                             &nbsp;
                             &nbsp;
 
                             <label> Numero: </label>
-                            <input id="numero" type="number" value="" required="true" data-dojo-type="dijit/form/NumberTextBox"
-                                data-dojo-props="placeHolder: 'Ingrese el numero de su calle', invalidMessage: 'Solo numeros' ">
-                            
+                            <input id="numero" type="number" name="Numero de Calle" value="" required="true"
+                                data-dojo-type="dijit/form/TextBox"
+                                data-dojo-props="placeHolder: 'Ingrese el numero de su calle'">
+
                             <br>
                             <br>
 
-                            <label> Codigo Postal: </label>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input id="CP" type="number" value="" required="true" data-dojo-type="dijit/form/NumberTextBox"
-                                data-dojo-props="placeHolder: 'Ingrese su codigo Postal', invalidMessage: 'Solo numeros' ">
 
-                                &nbsp;
-                                &nbsp;
+                            <label> Codigo Postal: </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input id="CP" type="number" name="Codigo Postal" value="" required="true"
+                                data-dojo-type="dijit/form/ValidationTextBox"
+                                data-dojo-props="placeHolder: 'Ingrese su CP'">
+
+                            &nbsp;
+                            &nbsp;
 
                             <label> Provincia: </label>
-                            <select id="Provincia" data-dojo-type="dijit/form/FilteringSelect"
-                            data-dojo-props="value:'',placeHolder: 'Selecciona tu Provincia'">
+                            <select id="Provincia" name="Provincia" data-dojo-type="dijit/form/FilteringSelect"
+                                data-dojo-props="value:'',placeHolder: 'Selecciona tu Provincia'">
                                 <option value="Buenos Aires">Buenos Aires</option>
                                 <option value="Chaco">Chaco</option>
                                 <option value="Formosa">Formosa</option>
@@ -282,60 +327,111 @@
                                 <h2> Zona de Comentarios </h2>
                             </legend>
 
+                            <!-- Vamos a agregar el Editor de Dijit, para que puedan agregar comentarios -->
 
+                            <!-- Revisar limite de caracteres -->
+
+                            <div id="comentarios" data-dojo-type="dijit/Editor"
+                                data-dojo-props="plugins:['bold','italic','|','cut','copy','paste','|','insertUnorderedList'],">
+
+                            </div>
+
+
+                            <div data-dojo-type="dijit/Dialog" data-dojo-id="LimiteCaracteres"
+                                title="ERROR DE CARACTERES"
+                                content="Has superado el limite de 120 caracteres, revisa tu comentario"> </div>
+
+
+                            <!--div data-dojo-type="dijit/Editor" id="editor1" data-dojo-props="onChange:function(){console.log('editor1 onChange handler: ' + arguments[0])}">
+                                <p>This instance is created from a div directly with default toolbar and plugins</p>
+                            </div-->
 
 
                         </fieldset>
 
-
-
                         <br>
-                        <div class="center">
+
+                        <!--div class="center">
                             <div data-dojo-type="dijit/form/ValidationTextBox"
                                 data-dojo-props="validator:dojox.validate.isOver666, invalidMessage:'Value must be over 666'"
                                 title="Custom:" name="custom" value="123"></div>
-                        </div>
-
-                        <!-- !!Revisar repositorio de Cepa y agregar validacion de sitio web, de tarjeta de credito, y agregar 
-                        formato de numero de telefono y el dinero que va a abonar!!  -->
-
+                        </div-->
 
                         <!--label for="zip2">Also 5-Digit U.S. Zipcode only:</label>
                         <input type="text" name="zip" value="00000" id="zip2" required="true"
                             data-dojo-type="dijit/form/ValidationTextBox"
                             data-dojo-props="regExpGen:after5, invalidMessage:'Zip codes after 5, county name before then.'" /-->
 
-
-
-                        <!-- Vamos a agregar el Editor de Dijit, para que puedan agregar comentarios -->
-
                         <br>
                         <br>
                         <div class="center">
-                            <button type="submit" dojoType="dijit.form.Button" observer="showValues">Registrate</button>
+                            <button id="registro" type="submit" dojoType="dijit.form.Button"
+                                observer="showValues">Registrate</button>
                         </div>
 
-                        <script type="dojo/on" data-dojo-event="submit">
-                            if(this.validate()){
-                            return confirm("El fomulario es valido");}  
-                            else{
-                                alert("El formulario no es valido, reviselo por favor");
-                                return false;
-                            }
-                        </script>
+                        <!-- Se devuelve false en ambos casos, para que no se realice el envio del formulario -->
+                        <!--script type="dojo/on" data-dojo-event="Submit">
+                                if(this.validate()){
+                                    exito.show();
+                                    return false; }  
+                                 else{
+                                    DialogError.show();
+                                    return false;
+                                    }
+                        </script-->
 
 
+                        <!--script type="dojo/method" data-dojo-event="validate">
+                            return dojo.query('INPUT[name=order]', 'form').filter(function(n){return n.checked;}).length > 0 &&
+                            dijit.form.Form.prototype.validate.apply(this, arguments);
+                         </script>
+                         <script type="dojo/method" data-dojo-event="onSubmit">
+
+                             require(["dojo/dom","dijit/Dialog"], function(dom,Dialog){
+                                 var f = dom.byId("form");
+                                 var s="";
+                                 
+                                 
+                                 for(var i = 0; i < f.elements.length; i++){
+                                     var elem = f.elements[i];
+                                     if(elem.name == "button"){ continue; }
+                                     if(elem.value ==="" && elem.name !=""){
+                                        console.log(elem.value);
+                                        s += elem.name + "\n" ;
+                                      }
+                                     
+                                 }
+                                 if(s !=""){
+
+                                    //Podes setear los distintos atributos
+                                    DialogError.set("content","Los siguientes campos no fueron completados:\n" + s);
+                                    alert("Los siguientes campos no fueron completados :\n" + s);
+                                    DialogError.show();
+                                    s += "";
+                                    revisarCaracteres();
+                                    
+
+                                 } else{
+                                    revisarCaracteres();
+                                     exito.show();
+                                 }
+                                
+                             });
+                            return false;
+                         </script-->
 
                     </form>
 
                 </div>
 
+                <!--COMIENZA LA PESTAÑA DE FAN CLUB -->
                 <div class="TabPanel3" data-dojo-type="dijit/layout/ContentPane"
-                    data-dojo-props="title: 'Fan Club de Pokemon'">
+                    data-dojo-props="title:'Fan Club de Pokemon'">
 
 
                     <table id="FanClub">
                         <tr>
+                            <th>Numero de socio</th>
                             <th>Nombre Completo</th>
                             <th> E-mail </th>
                             <th> Pais </th>
@@ -348,12 +444,64 @@
                     <br>
                     <div class="center">
                         <button id="descargarFans"></button>
+                        <button id="aniadirFan"></button>
+                        <button id="eliminarFan"></button>
+
+                        <!-- El dialogo permanecera escondido hasta que se presione el boton UNIRTE AL FAN CLUB para mostrarlo -->
+                        <div data-dojo-type="dijit/Dialog" data-dojo-id="InscripcionFan" title="Bienvenido">
+                            <!--  -->
+                            <table class="dijitDialogPaneContentArea" style="width:50px">
+                                <tr>
+                                    <td><label for="name">Nombre: </label></td>
+                                    <td><input data-dojo-type="dijit/form/TextBox" name="name" id="nameF"></td>
+
+                                </tr>
+                                <tr>
+                                    <td><label for="apeF">Apellido:</label></td>
+                                    <td><input data-dojo-type="dijit/form/TextBox" name="apeF" id="apeF"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="direccion">Email: </label></td>
+                                    <td><input id="emailF" type="email" name="email" value="" required="true"
+                                            autocomplete="off" data-dojo-type="dijit/form/ValidationTextBox"
+                                            data-dojo-props="validator:dojox.validate.isEmailAddress, invalidMessage:'E-mail invalido', placeHolder:'miemail@email.com' " />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="direccion">Email: </label></td>
+                                    <td> <input id="emailConfirmar" type="email" name="emailConfirmar" value=""
+                                            required="true" autocomplete="off"
+                                            data-dojo-type="dijit/form/ValidationTextBox"
+                                            data-dojo-props="validator:dojox.validate.isEmailAddress, invalidMessage:'E-mail invalido', placeHolder:'repetir E-mail' " />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><label for="paisF">Pais: </label></td>
+                                    <td><input data-dojo-type="dijit/form/TextBox" name="paisF" id="paisF">
+                                        <br>
+                                        <div class="center"> <div id="errorMail" style="display:none;"> LOS EMAIL NO COINCIDEN </div> </div>
+                                    </td>     
+                                </tr>
+                            
+                            </table>
+
+                            <div class="dijitDialogPaneActionBar">
+                                <button data-dojo-type="dijit/form/Button" type="button" id="EnviarD"></button>
+                                <!--button data-dojo-type="dijit/form/Button" id="ok">OK</button-->
+                                <button data-dojo-type="dijit/form/Button" type="button"
+                                    data-dojo-props="onClick:function(){InscripcionFan.hide();}"
+                                    id="cancel">Cancel</button>
+                            </div>
+                        </div>
+
+        
+
                     </div>
 
 
+
                 </div>
-
-
 
 
             </div>
@@ -361,7 +509,42 @@
 
         </div>
 
+
     </div>
+
+    </div>
+
+
+    <!-- DIALOGO DE INICIO DE SESION -->
+
+    <div data-dojo-type="dijit/Dialog" data-dojo-id="IniciodeSesionD" title="Bienvenido">
+       
+        <table class="dijitDialogPaneContentArea" style="width:425px">
+            
+            <tr>
+                <td><label for="emailRegistro">Email: </label></td>
+                <td><input id="emailRegistro" type="email" name="email" value="" required="true" autocomplete="off"
+                        data-dojo-type="dijit/form/ValidationTextBox"
+                        data-dojo-props="validator:dojox.validate.isEmailAddress, invalidMessage:'E-mail invalido', placeHolder:'miemail@email.com' " />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="numeroSocio">Numero de socio: </label></td>
+                <td><input data-dojo-type="dijit/form/NumberTextBox" name="name" id="numeroSocio"
+                    data-dojo-props="invalidMessage: 'Solo numeros'"></td>   
+            </tr>
+            
+        </table>
+
+        <div class="dijitDialogPaneActionBar">
+            <button data-dojo-type="dijit/form/Button" type="button" id="Ingresar"></button>
+            
+            <button data-dojo-type="dijit/form/Button" type="button"
+                data-dojo-props="onClick:function(){IniciodeSesionD.hide();}"
+                id="cancelar">Cancelar</button>
+        </div>
+    </div>
+
 
 
 </body>

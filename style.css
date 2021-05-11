@@ -1,4 +1,4 @@
-h2 {
+h1,h2 {
     text-align: center;
     color: rgb(16, 74, 235);
 }
@@ -20,6 +20,10 @@ div.center{
     background-color: rgb(182, 229, 160);
 }
 
+.parrafoBienvenida{
+    font-size: x-large;
+text-align: center;
+}
 
 
 /* #FanClub{
@@ -79,3 +83,79 @@ html, body {
     text-align: center;
 }
 
+/* Configuracion para que el calendario tenga un tamaño determinado */
+.dijitCalendarPopup {
+    width: 25%;
+   
+}
+
+#dialogColorExito_underlay {
+    background-color: rgb(4, 255, 45);
+}
+
+#dialogColorError_underlay{
+    background-color: rgb(255, 4, 4);
+}
+
+#InscripcionFan{
+    width: 20%;
+}
+
+#errorMail{
+    font-size:15px;
+    color:#f60909;
+    margin-top: 20px;
+}
+
+.alinearDerecha{
+    margin: auto;
+    text-align: right;
+}
+
+/* Configuracion del icono de carga */
+
+.pageOverlay {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1001;
+    display: block;
+}
+
+#iconoCarga {
+    background:  rgba(255, 255, 255, 0) url('https://m.gifmania.pt/Gifs-Animados-Manga-Anime/Imagens-Animadas-Pokemon/Gif-Animados-Pokebolas/Pokebolas-17369.gif') no-repeat 50% 50%;
+    visibility: hidden;
+}
+
+/*.loadingMessage {
+    padding: 40% 40%;
+    vertical-align:middle;
+    color: rgb(0, 0, 0);
+    font-size:18px;
+}*/
+
+#appLayout {
+    height: 100%;
+    width: 100%;
+}
+
+/* Atributos del FORM de la Bienvenida al Fan Club */
+
+.preguntas{
+    color: #000;
+    
+}
+
+.contenidoPrincipiante{
+    display: none;
+}
+
+.contenidoVeterano{
+    display: none;
+}
+
+.boton{
+    display: none;
+}
